@@ -256,7 +256,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
                     marginTop: 40,
                     alignItems: 'center'
                 }}
-                title={selectedTab.toUpperCase()}
+                title={selectedTab}
                 leftComponent={
                     <TouchableOpacity
                         style={{

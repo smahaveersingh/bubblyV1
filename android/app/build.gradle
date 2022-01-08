@@ -189,7 +189,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
+    implementation project(':react-native-sqlite-storage')
     // start add this
     implementation(project(':react-native-maps')){
         exclude group: 'com.google.android.gms', module: 'play-services-base'

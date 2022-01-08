@@ -287,6 +287,8 @@ PODS:
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
+  - react-native-sqlite-storage (6.0.1):
+    - React-Core
   - React-perflogger (0.64.2)
   - React-RCTActionSheet (0.64.2):
     - React-Core/RCTActionSheetHeaders (= 0.64.2)
@@ -435,6 +437,7 @@ DEPENDENCIES:
   - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
+  - react-native-sqlite-storage (from `../node_modules/react-native-sqlite-storage`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -513,6 +516,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
+  react-native-sqlite-storage:
+    :path: "../node_modules/react-native-sqlite-storage"
   React-perflogger:
     :path: "../node_modules/react-native/ReactCommon/reactperflogger"
   React-RCTActionSheet:
@@ -583,6 +588,7 @@ SPEC CHECKSUMS:
   react-native-maps: 41d01d8e0afcebe32bec9eea3bd945adc1b18f7a
   react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
+  react-native-sqlite-storage: 6df009b8b67fe34c57c5fd06ee8fff7669fece6d
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
   React-RCTAnimation: 6a2e76ab50c6f25b428d81b76a5a45351c4d77aa
@@ -602,6 +608,6 @@ SPEC CHECKSUMS:
   Yoga: 575c581c63e0d35c9a83f4b46d01d63abc1100ac
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 22f064a00c09e061558d21c55d87a56cc56488b9
+PODFILE CHECKSUM: c9b4abad8055a031dbc1f8e64adc4187f5109bf5
 
 COCOAPODS: 1.11.2

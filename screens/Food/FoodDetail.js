@@ -24,11 +24,13 @@ const FoodDetail = ({ navigation, route }) => {
     const [foodItem, setFoodItem] = React.useState([])
     const [price, setPrice] = React.useState([])
     const [qty, setQty] = React.useState(1)
+    const [plabel, setplabel] = React.useState();
 
     React.useEffect(() => {
         let { foodItem } = route.params
         setFoodItem(foodItem)
         setPrice(foodItem.price)
+        
     }, [])
 
     // Render
@@ -290,7 +292,7 @@ const FoodDetail = ({ navigation, route }) => {
     }
 
     function renderFooter() {
-        //setselectedPrice(foodItem.price[selectedSize - 1]);
+        //setselectedPrice(foodItem.price[selectedSize - 1]);        
         return (
             <View
                 style={{
@@ -324,7 +326,10 @@ const FoodDetail = ({ navigation, route }) => {
                     
                     label="Buy Now"
                     label2={"€" + price[selectedSize - 1]}
-                    onPress={() => navigation.navigate("MyCart")}
+                    onPress={() => navigation.navigate("MyCart", {
+                        paramKey: price[selectedSize - 1],
+                        paramKey1: foodItem
+                    })}
                 />
                 
             </View>

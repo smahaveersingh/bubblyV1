@@ -16,6 +16,7 @@ target 'FoodDeliveryLiteApp' do
    pod 'react-native-google-maps', :path => rn_maps_path
    pod 'GoogleMaps'
    pod 'Google-Maps-iOS-Utils'
+   pod 'react-native-sqlite-storage', :path => '../node_modules/react-native-sqlite-storage'
 
   target 'FoodDeliveryLiteAppTests' do
     inherit! :complete

@@ -22,6 +22,24 @@ const categories = [
     }
 ]
 
+const service_categories = [
+    {
+        id: 1,
+        name: "Alcohol",
+        icon: require("../assets/images/whiskey.png")
+    },
+    {
+        id: 2,
+        name: "Food",
+        icon: require("../assets/images/hot.png")
+    },
+    {
+        id: 3,
+        name: "Taxi",
+        icon: require("../assets/images/taxi-stop.png")
+    }
+]
+
 const hamburger = {
     id: 1,
     name: "Jameson Irish Whiskey",
@@ -29,6 +47,7 @@ const hamburger = {
     description: "Starts from",
     about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
     categories: [1],
+    service_categories: [1],
     price: [17.99, 25.99, 31.99, 40.00],
     calories: 100,
     isFavourite: true,
@@ -42,6 +61,7 @@ const hotTacos = {
     description: "Starts from",
     about: "Crafting something that endures for over 150 years takes time and character. You’ll find plenty of both in the people and history that make Jack Daniel’s.",
     categories: [1],
+    service_categories: [1],
     price: [17.99, 25.99, 31.99, 40.00],
     calories: 100,
     isFavourite: false,
@@ -55,6 +75,7 @@ const vegBiryani = {
     description: "Starts from",
     about: "HEINEKEN Ireland is one of Ireland's leading beer and cider companies built on a proud brewing heritage that started in Cork over 160 years ago.",
     categories: [3],
+    service_categories: [1],
     price: [12.99, 20.99, 13.99, 20.00],
     calories: 100,
     isFavourite: true,
@@ -68,6 +89,7 @@ const wrapSandwich = {
     description: "Starts from",
     about: "Flavorful, with fruit, spice and nutty notes. Best to drink neat or on the rocks. Spectacular whiskey and the pinnacle of the brand's offerings.",
     categories: [1],
+    service_categories: [1],
     price: [17.99, 25.99, 31.99, 40.00],
     calories: 100,
     isFavourite: true,
@@ -75,16 +97,82 @@ const wrapSandwich = {
 }
 
 const w19_crimes = {
-    id: 4,
+    id: 5,
     name: "19 Crimes Red Wine ",
     type: "wine",
     description: "Starts from",
     about: "9 Crimes is inspired by those who, beginning in 1788, were transported to Australia for a life of hard labour. Many did not survive the journey. For the sea-beaten people who made it ashore, a new world awaited.",
     categories: [2],
+    service_categories: [1],
     price: [17.99, 25.99, 31.99, 40.00], 
     calories: 100,
     isFavourite: true,
     image: require("../assets/dummyData/19crimes.png")
+}
+
+const Alcohol = {
+    id: 6,
+    //name: "Alcohol and Sprits",
+    type: "Alcohol & Spirits",
+    description: "Starts from",
+    about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
+    categories: [1],
+    price: [17.99, 25.99, 31.99, 40.00],
+    calories: 100,
+    isFavourite: true,
+    image: require("../assets/images/whiskey.png")
+}
+
+const Food = {
+    id: 7,
+    //name: "Alcohol and Sprits",
+    type: "Food",
+    description: "Starts from",
+    //about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
+    categories: [1],
+    price: [9.99, 25.99, 31.99, 40.00],
+    calories: 100,
+    isFavourite: true,
+    image: require("../assets/images/hot.png")
+}
+
+const Taxi = {
+    id: 8,
+    //name: "Alcohol and Sprits",
+    type: "Taxi",
+    description: "Starts from",
+    about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
+    categories: [1],
+    price: [5.99, 25.99, 31.99, 40.00],
+    calories: 100,
+    //isFavourite: true,
+    image: require("../assets/images/taxi-stop.png")
+}
+
+const R_PizzaHut = {
+    id: 9,
+    name: "PizzaHut",
+    type: "Food",
+    description: "Discounts from",
+    about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
+    categories: [1],
+    price: [5.99 , 25.99, 31.99, 40.00],
+    calories: 100,
+    //isFavourite: true,
+    image: require("../assets/images/pizza-hut.png")
+}
+
+const R_Food = {
+    id: 10,
+    name: "20% off any food for New Registered Customers",
+    type: "Food",
+    description: "Discounts for orders starting from",
+    about: "It is no overstatement to say that Jameson is the Irish king of whiskey. The brand has been creating casks of everyones favourite amber spirit for over 200 years.",
+    categories: [1],
+    price: [19.99 , 25.99, 31.99, 40.00],
+    calories: 100,
+    //isFavourite: true,
+    image: require("../assets/images/favourite_food.png")
 }
 
 const menu = [
@@ -128,6 +216,20 @@ const menu = [
         name: "Recommended",
         list: [
             hamburger, hotTacos, wrapSandwich, w19_crimes, vegBiryani
+        ]
+    },
+    {
+        id: 7,
+        name: "Services",
+        list: [
+            Alcohol, Food, Taxi,
+        ]
+    },
+    {
+        id: 8,
+        name: "Rewards",
+        list: [
+            R_PizzaHut, R_Food,
         ]
     },
 
@@ -473,4 +575,5 @@ export default {
     usedCoupons,
     notifications,
     deliveryMan,
+    service_categories
 }

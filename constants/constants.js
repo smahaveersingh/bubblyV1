@@ -9,14 +9,14 @@ const onboarding_screens = [
     {
         id: 2,
         backgroundImage: require("../assets/images/background_02.png"),
-        bannerImage: require("../assets/images/wine.png"),
+        bannerImage: require("../assets/images/taxi.png"),
         title: "Straight Delivery to Home",
         description: "Taste the excitement, It’s got the standards"
     },
     {
         id: 3,
         backgroundImage: require("../assets/images/background_01.png"),
-        bannerImage: require("../assets/images/whiskey.png"),
+        bannerImage: require("../assets/images/hot.png"),
         title: "For every occasion",
         description: "Here begins the high time of your life where desire meets a new taste"
     }
@@ -26,7 +26,7 @@ const screens = {
     main_layout: "MainLayout",
     home: "Home",
     search: "Search",
-    cart: "MyCart",
+    cart: "Cart",
     favourite: "Favourite",
     notification: "Notification",
     my_wallet: "My Wallet",

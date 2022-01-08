@@ -16,18 +16,19 @@ import {
 } from "../../components"
 import { FONTS, SIZES, COLORS, icons, dummyData } from "../../constants"
 
-const MyCart = ({ navigation }) => {
+const MyCart = ({ navigation, route }) => {
 
     const [myCartList, setMyCartList] = React.useState(dummyData.myCart)
-
+    const [total, settotal] = React.useState(route.params.paramKey + 3.5)
     // Handler
 
     function updateQuantityHandler(newQty, id) {
         let newMyCartList = myCartList.map(cl => (
-            cl.id === id ? { ...cl, qty: newQty } : cl
+            cl.id === id ? { ...cl, qty: newQty } : cl4
         ))
 
         setMyCartList(newMyCartList)
+        settotal(route.params.paramKey + 3)
     }
 
     function removeMyCartHandler(id) {
@@ -169,9 +170,9 @@ const MyCart = ({ navigation }) => {
     function renderFooter() {
         return (
             <FooterTotal
-                subTotal={37.97}
-                shippingFee={0.00}
-                total={37.97}
+                subTotal={route.params.paramKey}
+                shippingFee={3.00}
+                total={total}
                 onPress={() => navigation.navigate("MyCard")}
             />
         )

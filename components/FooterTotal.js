@@ -47,10 +47,23 @@ const FooterTotal = ({ subTotal, shippingFee, total, onPress }) => {
                     }}
                 >
                     <Text style={{ flex: 1, ...FONTS.body3 }}>Subtotal</Text>
-                    <Text style={{ ...FONTS.h3 }}>${subTotal.toFixed(2)}</Text>
+                    <Text style={{ ...FONTS.h3 }}>€{subTotal.toFixed(2)}</Text>
+
+                    
                 </View>
 
                 {/* Shipping Fee */}
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        //marginTop: SIZES.base,
+                        marginBottom: SIZES.padding
+                    }}
+                >
+                    <Text style={{ flex: 1, ...FONTS.body3 }}>Shipping fee</Text>
+                    <Text style={{ ...FONTS.h3 }}>€{shippingFee.toFixed(2)}</Text>
+                </View>
+
                 <View
                     style={{
                         flexDirection: 'row',
@@ -58,8 +71,8 @@ const FooterTotal = ({ subTotal, shippingFee, total, onPress }) => {
                         marginBottom: SIZES.padding
                     }}
                 >
-                    <Text style={{ flex: 1, ...FONTS.body3 }}>Shipping fee</Text>
-                    <Text style={{ ...FONTS.h3 }}>${shippingFee.toFixed(2)}</Text>
+                    <Text style={{ flex: 1, ...FONTS.body3 }}>Sevice Fee</Text>
+                    <Text style={{ ...FONTS.h3 }}>€0.50</Text>
                 </View>
 
                 <LineDivider />
@@ -72,7 +85,7 @@ const FooterTotal = ({ subTotal, shippingFee, total, onPress }) => {
                     }}
                 >
                     <Text style={{ flex: 1, ...FONTS.h2 }}>Total:</Text>
-                    <Text style={{ ...FONTS.h2 }}>${total.toFixed(2)}</Text>
+                    <Text style={{ ...FONTS.h2 }}>€{total.toFixed(2)}</Text>
                 </View>
 
                 {/* Order */}

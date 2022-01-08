@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen'
-
+import {getDBConnection} from './database/database-connection';
 import CustomDrawer from './navigation/CustomDrawer';
 
 import { createStore, applyMiddleware } from "redux";
