@@ -195,38 +195,43 @@ const gender = [
         label: "Female",
         value: "Female"
     },
+    {
+        id: 2,
+        label: "Other",
+        value: "Other"
+    },
 ]
 
 const state = [
     {
         id: 0,
-        label: "Sarawak",
-        value: "Sarawak"
+        label: "Louth",
+        value: "Louth"
     },
     {
         id: 1,
-        label: "Sabah",
-        value: "Sabah"
+        label: "Dublin",
+        value: "Dublin"
     },
     {
         id: 2,
-        label: "Johor",
-        value: "Johor"
+        label: "Limerick",
+        value: "Limerick"
     },
     {
         id: 3,
-        label: "Kedah",
-        value: "Kedah"
+        label: "Galway",
+        value: "Galway"
     },
     {
         id: 4,
-        label: "Kelantan",
-        value: "Kelantan"
+        label: "Cork",
+        value: "Cork"
     },
     {
         id: 5,
-        label: "Penang",
-        value: "Penang"
+        label: "Belfast",
+        value: "Belfast"
     },
 ]
 

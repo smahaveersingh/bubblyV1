@@ -120,7 +120,7 @@ const MyAccount = ({ navigation }) => {
 
                 <InfoItem
                     label="Email"
-                    value="byprogrammers@gmail.com"
+                    value="{global.Myemail}"
                 />
 
                 <InfoItem

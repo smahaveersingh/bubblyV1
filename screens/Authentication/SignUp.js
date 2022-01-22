@@ -14,6 +14,8 @@ import {
     TextIconButton
 } from "../../components"
 import { utils } from "../../utils";
+import { authentication } from "../../firebase/firebase-config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = ({ navigation }) => {
     const [email, setEmail] = React.useState("")
@@ -28,6 +30,19 @@ const SignUp = ({ navigation }) => {
     function isEnableSignUp() {
         return email != "" && username != "" && password != "" && emailError == "" && passwordError == ""
     }
+
+    const RegisterUser = () => {
+        createUserWithEmailAndPassword(authentication, email, password)
+        .then((re)=>{
+            console.log(re);
+            navigation.navigate("Home");
+        })
+        .catch((re)=>{
+            console.log(re);
+        })
+
+        //navigation.navigate("Otp")}
+    } 
 
     return (
         <AuthLayout
@@ -144,7 +159,7 @@ const SignUp = ({ navigation }) => {
                         borderRadius: SIZES.radius,
                         backgroundColor: isEnableSignUp() ? COLORS.primary : COLORS.transparentPrimary,
                     }}
-                    onPress={() => navigation.navigate("Otp")}
+                    onPress={RegisterUser}
                 />
 
                 <View

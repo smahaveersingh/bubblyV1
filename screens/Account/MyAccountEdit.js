@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import {
+    TouchableHighlight,
+    TouchableWithoutFeedback,
     View,
+    Text
 } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import {
     Header,
@@ -11,8 +14,10 @@ import {
     FormInput,
     FormDateInput,
     FormPicker
-} from "../../components"
-import { COLORS, SIZES, icons, constants } from "../../constants"
+} from "../../components";
+import { COLORS, SIZES, icons, constants } from "../../constants";
+import { db, referenceSupport } from '../../firebase/firebase-config';
+import {collection, getDocs, doc, setDoc, getDoc} from "firebase/firestore/lite";
 
 const MyAccountEdit = ({ navigation }) => {
 
@@ -26,6 +31,54 @@ const MyAccountEdit = ({ navigation }) => {
     const [city, setCity] = useState("")
     const [state, setState] = useState("")
     const [zip, setZip] = useState("")
+    const [docId, setdocId] = useState("defaultid101")
+
+    const path = "users/" + docId;
+
+    global.Mypath = path;
+
+    const rfrncSupport = doc(db, path);
+
+    const GetData = async () => {
+        //const usersCol = collection(db, "users", )
+        //getting all docs from users collection 
+        //const userSnapshot = await (await getDocs(usersCol));
+        //creating a list of all docs from userSnapshot
+        //const userList = userSnapshot.docs.map(doc => doc.data());
+        //console.log(JSON.stringify(userList));
+        //console.lo
+        const mySnapshot = await getDoc(rfrncSupport);
+         if(mySnapshot.exists()) {
+             const data = mySnapshot.data();
+             console.log('My data is ' + JSON.stringify(data));
+         }
+    }
+
+    function getRandomDocumentID(length){
+        const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var result = '';
+        for ( var i = 0; i < length; i++ ) {
+            result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+            setdocId(result)
+        }
+        
+        return result;
+    }
+
+    const SetUserData = async () => {
+        await setDoc(doc(db, "users", getRandomDocumentID(16)),{
+            address: addr,
+            dob: dob,
+            email: email,
+            gender: gender,
+            name: fullName,
+            number: phoneNo
+        });
+        //GetData();
+        //console.log(path)
+        //navigation.navigate('MyAccount');
+    }
+
 
     function renderHeader() {
         return (
@@ -252,19 +305,38 @@ const MyAccountEdit = ({ navigation }) => {
             >
                 {renderForm()}
             </KeyboardAwareScrollView>
-
-            <TextButton
-                buttonContainerStyle={{
-                    height: 60,
-                    marginTop: SIZES.padding,
+            <View>
+            <TouchableWithoutFeedback
+            onPressIn={SetUserData}
+            onPress={GetData}
+            >
+            <View
+            style={{
+                borderWidth: 1, 
+                borderColor: '#0277BD', 
+                padding: 12, 
+                marginTop: SIZES.padding,
                     marginHorizontal: SIZES.padding,
                     marginBottom: SIZES.padding,
                     borderRadius: SIZES.radius,
-                    backgroundColor: COLORS.primary
+                    backgroundColor: COLORS.black,
+            }}>
+                <Text
+                style={{
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontSize: 18, 
+                    color: 'white', 
+                    alignSelf: 'auto', 
+                    textAlign: 'center' 
                 }}
-                label="Save"
-                onPress={() => navigation.goBack()}
-            />
+            >Save</Text>
+            </View>
+                
+            </TouchableWithoutFeedback>  
+            </View>
+            
+            
         </View>
     )
 }

@@ -180,7 +180,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
             })
 
             homeTabFlex.value = withTiming(4, { duration: 500 })
-            homeTabColor.value = withTiming(COLORS.primary, { duration: 500 })
+            homeTabColor.value = withTiming(COLORS.black, { duration: 500 })
         } else {
             homeTabFlex.value = withTiming(1, { duration: 500 })
             homeTabColor.value = withTiming(COLORS.white, { duration: 500 })
@@ -193,7 +193,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
             })
 
             searchTabFlex.value = withTiming(4, { duration: 500 })
-            searchTabColor.value = withTiming(COLORS.primary, { duration: 500 })
+            searchTabColor.value = withTiming(COLORS.black, { duration: 500 })
         } else {
             searchTabFlex.value = withTiming(1, { duration: 500 })
             searchTabColor.value = withTiming(COLORS.white, { duration: 500 })
@@ -206,7 +206,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
             })
 
             cartTabFlex.value = withTiming(4, { duration: 500 })
-            cartTabColor.value = withTiming(COLORS.primary, { duration: 500 })
+            cartTabColor.value = withTiming(COLORS.black, { duration: 500 })
         } else {
             cartTabFlex.value = withTiming(1, { duration: 500 })
             cartTabColor.value = withTiming(COLORS.white, { duration: 500 })
@@ -219,7 +219,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
             })
 
             favouriteTabFlex.value = withTiming(4, { duration: 500 })
-            favouriteTabColor.value = withTiming(COLORS.primary, { duration: 500 })
+            favouriteTabColor.value = withTiming(COLORS.black, { duration: 500 })
         } else {
             favouriteTabFlex.value = withTiming(1, { duration: 500 })
             favouriteTabColor.value = withTiming(COLORS.white, { duration: 500 })
@@ -232,7 +232,7 @@ const MainLayout = ({ drawerAnimationStyle, navigation, selectedTab, setSelected
             })
 
             notificationTabFlex.value = withTiming(4, { duration: 500 })
-            notificationTabColor.value = withTiming(COLORS.primary, { duration: 500 })
+            notificationTabColor.value = withTiming(COLORS.black, { duration: 500 })
         } else {
             notificationTabFlex.value = withTiming(1, { duration: 500 })
             notificationTabColor.value = withTiming(COLORS.white, { duration: 500 })

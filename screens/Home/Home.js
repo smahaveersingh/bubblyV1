@@ -15,6 +15,9 @@ import {
     VerticalFoodCard
 } from "../../components";
 import { FONTS, SIZES, COLORS, icons, dummyData } from "../../constants";
+import { db } from '../../firebase/firebase-config';
+import {collection, getDocs} from "firebase/firestore/lite";
+
 
 const Section = ({ title, onPress, children }) => {
     return (
@@ -62,6 +65,16 @@ const Home = () => {
     React.useEffect(() => {
         handleChangeCategory(selectedCategoryId, selectedMenuType)
     }, [])
+
+    // Function to get data from firestore
+    const GetData = async () => {
+        const usersCol = collection(db, 'users');
+        //getting all docs from users collection 
+        const userSnapshot = await getDocs(usersCol);
+        //creating a list of all docs from userSnapshot
+        const userList = userSnapshot.docs.map(doc => doc.data());
+        console.log(userList);
+    }
 
     // Handler
 
@@ -252,7 +265,7 @@ const Home = () => {
                             marginRight: index == dummyData.categories.length - 1 ? SIZES.padding : 0,
                             paddingHorizontal: 8,
                             borderRadius: SIZES.radius,
-                            backgroundColor: selectedCategoryId == item.id ? COLORS.primary : COLORS.lightGray2
+                            backgroundColor: selectedCategoryId == item.id ? COLORS.lightOrange2 : COLORS.lightGray2
                         }}
                         onPress={() => {
                             setSelectedCategoryId(item.id)
@@ -272,7 +285,7 @@ const Home = () => {
                             style={{
                                 alignSelf: 'center',
                                 marginRight: SIZES.base,
-                                color: selectedCategoryId == item.id ? COLORS.white : COLORS.darkGray,
+                                color: selectedCategoryId == item.id ? COLORS.black : COLORS.darkGray,
                                 ...FONTS.h3
                             }}
                         >
@@ -308,6 +321,7 @@ const Home = () => {
                         marginTop: SIZES.base,
                         alignItems: 'center'
                     }}
+                    onPress={GetData}
                 >
                     <Text style={{ ...FONTS.h3 }}>
                         {dummyData?.myProfile?.address}

@@ -22,6 +22,8 @@ import {
     icons,
     dummyData
 } from "../constants";
+import { signOut } from "firebase/auth";
+import { authentication } from '../firebase/firebase-config';
 
 const Drawer = createDrawerNavigator()
 
@@ -61,7 +63,24 @@ const CustomDrawerItem = ({ label, icon, isFocused, onPress }) => {
     )
 }
 
+
+
 const CustomDrawerContent = ({ navigation, selectedTab, setSelectedTab }) => {
+    const Myemail = global.Myemail;
+
+    const SignOutUser = () => {
+        signOut(authentication)
+        .then((re) => {
+            //setisSignedIn(false);
+            console.log('signout succesfull!!! ')
+            navigation.navigate("SignIn")
+            console.log(re)
+        })
+        .catch((re)=>{
+            console.log(re);
+        })
+    }
+
     return (
         <DrawerContentScrollView
             scrollEnabled={true}
@@ -124,7 +143,7 @@ const CustomDrawerContent = ({ navigation, selectedTab, setSelectedTab }) => {
                             marginLeft: SIZES.radius
                         }}
                     >
-                        <Text style={{ color: COLORS.black, ...FONTS.h3 }}>{dummyData.myProfile?.name}</Text>
+                        <Text style={{ color: COLORS.black, ...FONTS.h3 }}>{Myemail.substring(0, Myemail.lastIndexOf("@"))}</Text>
                         <Text style={{ color: COLORS.black, ...FONTS.body4 }}>View your profile</Text>
                     </View>
                 </TouchableOpacity>
@@ -236,6 +255,8 @@ const CustomDrawerContent = ({ navigation, selectedTab, setSelectedTab }) => {
                     <CustomDrawerItem
                         label="Logout"
                         icon={icons.logout}
+                        onPress={SignOutUser
+                        }
                     />
                 </View>
             </View>
@@ -243,9 +264,10 @@ const CustomDrawerContent = ({ navigation, selectedTab, setSelectedTab }) => {
     )
 }
 
-const CustomDrawer = ({ selectedTab, setSelectedTab }) => {
+const CustomDrawer = ({ selectedTab, setSelectedTab, route }) => {
     const [progress, setProgress] = React.useState(new Animated.Value(0))
-
+    //const [isSignedIn, setisSignedIn] = React.useState(false)
+    
     const scale = Animated.interpolateNode(progress, {
         inputRange: [0, 1],
         outputRange: [1, 0.8]

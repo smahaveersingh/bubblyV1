@@ -14,21 +14,77 @@ import {
     TextIconButton
 } from "../../components"
 import { utils } from "../../utils";
+import { authentication } from "../../firebase/firebase-config";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 
 const SignIn = ({ navigation }) => {
 
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [emailError, setEmailError] = React.useState("")
-
+    const [isSignedIn, setisSignedIn] = React.useState(false)
+    
     const [showPass, setShowPass] = React.useState(false)
     const [saveMe, setSaveMe] = React.useState(false)
+
+    global.Myemail = email;
 
     function isEnableSignIn() {
         return email != "" && password != "" && emailError == ""
     }
 
-    return (
+    const SignInUser = () => {
+        // onAuthStateChanged(onAuthStateChanged1)
+        // .then((re)=>{
+        //     console.log(re);
+        //     setisSignedIn(true);
+        // })
+        // .catch((re)=>{
+        //     console.log(re);
+        //     errorCode = re.code;
+        //     errorMessage = re.message;
+        //   if (errorCode === 'auth/wrong-password') {
+        //     console.log("Wrong password");
+        //     alert('Wrong password.');
+        //   } else {
+        //     console.log("Navigate to Home");
+        //     navigation.navigate("Home");
+        //     setisSignedIn(false);
+        //   }
+        // })
+
+
+        signInWithEmailAndPassword(authentication, email, password)
+        .then((re)=>{
+            console.log(re);
+            const createdAt = re.createdAt;
+            console.log("creadted At" + createdAt)
+            navigation.navigate("Home", {
+                paramKey: email
+            });
+            setisSignedIn(true);
+        })
+        .catch((re)=>{
+            console.log(re);
+            errorCode = re.code;
+            errorMessage = re.message;
+          if (errorCode === 'auth/wrong-password') {
+            console.log("Wrong password");
+            alert('Wrong password.');
+          } else {
+            console.log("Navigate to Home");
+            navigation.navigate("Home");
+            setisSignedIn(false);
+          }
+        })
+    } 
+
+ 
+
+
+    
+    return(
         <AuthLayout
             title="Let's Sign You In"
             subtitle="Welcome back, you've been missed!"
@@ -137,7 +193,7 @@ const SignIn = ({ navigation }) => {
                         borderRadius: SIZES.radius,
                         backgroundColor: isEnableSignIn() ? COLORS.primary : COLORS.transparentPrimary,
                     }}
-                    onPress={() => navigation.replace("Home")}
+                    onPress={SignInUser}
                 />
 
                 {/* Sign Up */}
@@ -161,6 +217,7 @@ const SignIn = ({ navigation }) => {
                         onPress={() => navigation.navigate("SignUp")}
                     />
                 </View>
+              
             </View>
 
             {/* Footer */}
@@ -207,6 +264,7 @@ const SignIn = ({ navigation }) => {
             </View>
         </AuthLayout>
     )
+
 }
 
 export default SignIn;
