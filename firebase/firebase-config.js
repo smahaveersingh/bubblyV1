@@ -1,6 +1,7 @@
-import {initializeApp} from "firebase/app";
+import * as firebase from "firebase/app";
 import {getAuth} from "firebase/auth";
-import {getFirestore, doc} from "firebase/firestore/lite";
+import {getFirestore, doc} from "firebase/firestore";
+import * as storage from "firebase/storage";
 
 
 const firebaseconfig = {
@@ -14,7 +15,11 @@ const firebaseconfig = {
     measurementId: "G-SB5K0TMJNZ"
 };
 
-const app = initializeApp(firebaseconfig);
+const app = firebase.initializeApp(firebaseconfig);
 export const authentication = getAuth(app);
 export const db = getFirestore(app);
 export const referenceSupport = doc(db, 'users/21-01-2022');
+export const filestorage = storage.getStorage(app);
+// Create a storage reference from firebase storage service
+export const storageRef = storage.ref(filestorage);
+

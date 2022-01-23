@@ -16,8 +16,8 @@ import {
     FormPicker
 } from "../../components";
 import { COLORS, SIZES, icons, constants } from "../../constants";
-import { db, referenceSupport } from '../../firebase/firebase-config';
-import {collection, getDocs, doc, setDoc, getDoc} from "firebase/firestore/lite";
+import { db, authentication } from '../../firebase/firebase-config';
+import {collection, getDocs, doc, setDoc, getDoc} from "firebase/firestore";
 
 const MyAccountEdit = ({ navigation }) => {
 
@@ -32,10 +32,10 @@ const MyAccountEdit = ({ navigation }) => {
     const [state, setState] = useState("")
     const [zip, setZip] = useState("")
     const [docId, setdocId] = useState("defaultid101")
+    const [userData, setUserData] = useState(null);
+    
 
     const path = "users/" + docId;
-
-    global.Mypath = path;
 
     const rfrncSupport = doc(db, path);
 
@@ -46,27 +46,33 @@ const MyAccountEdit = ({ navigation }) => {
         //creating a list of all docs from userSnapshot
         //const userList = userSnapshot.docs.map(doc => doc.data());
         //console.log(JSON.stringify(userList));
-        //console.lo
         const mySnapshot = await getDoc(rfrncSupport);
          if(mySnapshot.exists()) {
              const data = mySnapshot.data();
+             setUserData(mySnapshot.data());
              console.log('My data is ' + JSON.stringify(data));
+         } else {
+             console.log('No such document');
          }
     }
 
-    function getRandomDocumentID(length){
-        const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var result = '';
-        for ( var i = 0; i < length; i++ ) {
-            result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-            setdocId(result)
+    function getDocumentID(){
+
+        const user = authentication.currentUser;
+        var uid = '';
+        if (user !== null) {
+            const displayName = user.displayName;
+            const email = user.email;
+            uid = user.uid;
+            setdocId(uid);
+            console.log('UID: ' + uid + ' Name: ' + displayName);
         }
         
-        return result;
+        return uid;
     }
 
     const SetUserData = async () => {
-        await setDoc(doc(db, "users", getRandomDocumentID(16)),{
+        await setDoc(doc(db, "users", getDocumentID()),{
             address: addr,
             dob: dob,
             email: email,
@@ -76,7 +82,9 @@ const MyAccountEdit = ({ navigation }) => {
         });
         //GetData();
         //console.log(path)
-        //navigation.navigate('MyAccount');
+        navigation.navigate('MyAccount', {
+            item: userData
+        });
     }
 
 
@@ -308,7 +316,7 @@ const MyAccountEdit = ({ navigation }) => {
             <View>
             <TouchableWithoutFeedback
             onPressIn={SetUserData}
-            onPress={GetData}
+            //onPress={GetData}
             >
             <View
             style={{

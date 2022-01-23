@@ -14,7 +14,7 @@ import {
     TextIconButton
 } from "../../components"
 import { utils } from "../../utils";
-import { authentication } from "../../firebase/firebase-config";
+import { authentication, db } from "../../firebase/firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const SignUp = ({ navigation }) => {
@@ -31,6 +31,7 @@ const SignUp = ({ navigation }) => {
         return email != "" && username != "" && password != "" && emailError == "" && passwordError == ""
     }
 
+
     const RegisterUser = () => {
         createUserWithEmailAndPassword(authentication, email, password)
         .then((re)=>{
@@ -40,7 +41,6 @@ const SignUp = ({ navigation }) => {
         .catch((re)=>{
             console.log(re);
         })
-
         //navigation.navigate("Otp")}
     } 
 

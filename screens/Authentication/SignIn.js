@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     View,
     Text,
@@ -16,6 +16,7 @@ import {
 import { utils } from "../../utils";
 import { authentication } from "../../firebase/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 
 const SignIn = ({ navigation }) => {
@@ -27,39 +28,22 @@ const SignIn = ({ navigation }) => {
     
     const [showPass, setShowPass] = React.useState(false)
     const [saveMe, setSaveMe] = React.useState(false)
-
+  
     global.Myemail = email;
+
 
     function isEnableSignIn() {
         return email != "" && password != "" && emailError == ""
     }
 
     const SignInUser = () => {
-        // onAuthStateChanged(onAuthStateChanged1)
-        // .then((re)=>{
-        //     console.log(re);
-        //     setisSignedIn(true);
-        // })
-        // .catch((re)=>{
-        //     console.log(re);
-        //     errorCode = re.code;
-        //     errorMessage = re.message;
-        //   if (errorCode === 'auth/wrong-password') {
-        //     console.log("Wrong password");
-        //     alert('Wrong password.');
-        //   } else {
-        //     console.log("Navigate to Home");
-        //     navigation.navigate("Home");
-        //     setisSignedIn(false);
-        //   }
-        // })
-
-
         signInWithEmailAndPassword(authentication, email, password)
         .then((re)=>{
             console.log(re);
-            const createdAt = re.createdAt;
-            console.log("creadted At" + createdAt)
+            const createdAt = re.user;
+            console.log("creadted At" + JSON.stringify(createdAt));
+            //console.log('User Details:' + userDetails);
+            //SetUserData();
             navigation.navigate("Home", {
                 paramKey: email
             });
@@ -80,7 +64,30 @@ const SignIn = ({ navigation }) => {
         })
     } 
 
- 
+    function getDocumentID(){
+        const user = authentication.currentUser;
+        var uid = '';
+        if (user !== null) {
+            const displayName = user.displayName;
+            const email = user.email;
+            uid = user.uid;
+            console.log('UID: ' + uid + ' Name: ' + displayName);
+        }       
+        return uid;
+    }
+
+    const SetUserData = async () => {
+        await setDoc(doc(db, "users", getDocumentID()),{
+            address: "Not Updated",
+            dob: "Not Updated",
+            email: email,
+            gender: "Not Updated",
+            name: "Not Updated",
+            number: "Not Updated"
+        });
+        //GetData();
+        //console.log(path)
+    }
 
 
     

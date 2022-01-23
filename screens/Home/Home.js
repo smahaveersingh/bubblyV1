@@ -15,7 +15,7 @@ import {
     VerticalFoodCard
 } from "../../components";
 import { FONTS, SIZES, COLORS, icons, dummyData } from "../../constants";
-import { db } from '../../firebase/firebase-config';
+import { authentication, db } from '../../firebase/firebase-config';
 import {collection, getDocs} from "firebase/firestore/lite";
 
 
@@ -74,6 +74,15 @@ const Home = () => {
         //creating a list of all docs from userSnapshot
         const userList = userSnapshot.docs.map(doc => doc.data());
         console.log(userList);
+
+        const user = authentication.currentUser;
+        if (user !== null) {
+            const displayName = user.displayName;
+            const email = user.email;
+            const uid = user.uid;
+
+            console.log('UID: ' + uid + ' Name: ' + displayName);
+        }
     }
 
     // Handler

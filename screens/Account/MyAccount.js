@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     View,
-    ScrollView
+    ScrollView,
+    SafeAreaView,
+    RefreshControl
 } from 'react-native';
 
 import {
@@ -10,9 +12,47 @@ import {
     TextButton,
     InfoItem
 } from "../../components"
-import { COLORS, SIZES, icons } from "../../constants"
+import { COLORS, SIZES, icons } from "../../constants";
+import { db, authentication } from '../../firebase/firebase-config';
+import { doc, getDoc} from 'firebase/firestore';
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 
 const MyAccount = ({ navigation }) => {
+
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+      setRefreshing(true);
+      wait(2000).then(() => setRefreshing(false));
+      GetUserData();
+    }, []);
+
+
+    const GetUserData = async () => {
+        const user = authentication.currentUser;
+        var uid = '';
+        if (user !== null) {
+            const displayName = user.displayName;
+            const email = user.email;
+            uid = user.uid;
+            console.log('UID: ' + uid + ' Name: ' + displayName) + ' email: ' + email;
+        }
+        
+        const docRef = doc(db, 'users', uid);
+        const docSnap = await getDoc(docRef);
+        const object = {};
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            console.log('Object Data: ' + object)
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+
+     }
 
     function renderHeader() {
         return (
@@ -132,6 +172,10 @@ const MyAccount = ({ navigation }) => {
         )
     }
 
+    useEffect(() => {
+        //GetUserData();
+    })
+
     return (
         <View
             style={{
@@ -140,15 +184,28 @@ const MyAccount = ({ navigation }) => {
             }}
         >
             {renderHeader()}
-
+            
+            <SafeAreaView 
+                style={{
+                    flex: 1
+                }}
+            >
             <ScrollView
                 contentContainerStyle={{
                     paddingHorizontal: SIZES.padding
                 }}
+                refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+                }
             >
                 {renderSectionOne()}
                 {renderSectionTwo()}
-            </ScrollView>
+            </ScrollView>                
+            </SafeAreaView>
+
         </View>
     )
 }
